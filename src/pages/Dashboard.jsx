@@ -6,8 +6,8 @@ import {
 } from "@ant-design/icons";
 import { Card, Space, Statistic, Table, Typography } from "antd";
 import React, { useEffect, useState } from "react";
-import { getOrders } from "../api";
-import React from "react";
+import { getOrders, getRevenue } from "../api";
+// import React from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -95,6 +95,7 @@ const Dashboard = () => {
       </Space>
       <Space>
         <RecentOrders />
+        <DashbaordCHart />
       </Space>
     </Space>
   );
@@ -109,7 +110,54 @@ function DashbaordCard({ title, value, icon }) {
     </Card>
   );
 }
+function DashbaordCHart() {
+  const [reveneuData, setReveneuData] = useState({
+    labels: [],
+    datasets: [],
+  });
 
+  useEffect(() => {
+    getRevenue().then((res) => {
+      const labels = res.carts.map((cart) => {
+        return `User-${cart.userId}`;
+      });
+      const data = res.carts.map((cart) => {
+        return cart.discountedTotal;
+      });
+
+      const dataSource = {
+        labels,
+        datasets: [
+          {
+            label: "Revenue",
+            data: data,
+            backgroundColor: "rgba(255, 0, 0, 1)",
+          },
+        ],
+      };
+
+      setReveneuData(dataSource);
+    });
+  }, []);
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "bottom",
+      },
+      title: {
+        display: true,
+        text: "Order Revenue",
+      },
+    },
+  };
+  return (
+    <Card style={{ width: 500, height: 250 }}>
+      <Bar options={options} data={reveneuData} />
+    </Card>
+  );
+}
 function RecentOrders() {
   const [orders, setOrders] = useState(0);
   const [loading, setloading] = useState(false);
@@ -145,4 +193,5 @@ function RecentOrders() {
     </>
   );
 }
+
 export default Dashboard;
