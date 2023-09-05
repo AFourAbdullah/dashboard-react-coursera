@@ -5,17 +5,21 @@ import { Space } from "antd";
 import Sidebar from "./components/Sidebar";
 import Content from "./components/Content";
 import { Footer } from "antd/es/layout/layout";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Dashboard from "./pages/Dashboard";
 const App = () => {
   return (
-    <div className="App">
-      <Header />
-      <div className="SideMenuAndPageContent">
-        <Sidebar />
-        <Content />
-      </div>
+    <BrowserRouter>
+      <div className="App">
+        <Header />
+        <div className="SideMenuAndPageContent">
+          <Sidebar />
+          <Content />
+        </div>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </BrowserRouter>
   );
 };
 
