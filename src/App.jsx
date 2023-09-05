@@ -4,14 +4,17 @@ import Header from "./components/Header";
 import { Space } from "antd";
 import Sidebar from "./components/Sidebar";
 import Content from "./components/Content";
+import { Footer } from "antd/es/layout/layout";
 const App = () => {
   return (
     <div className="App">
       <Header />
-      <Space>
+      <div className="SideMenuAndPageContent">
         <Sidebar />
         <Content />
-      </Space>
+      </div>
+
+      <Footer />
     </div>
   );
 };
