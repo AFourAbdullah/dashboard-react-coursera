@@ -33,7 +33,7 @@ const Sidebar = () => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          gap: "60px",
+          gap: "30px",
           borderRadius: "20px",
           marginTop: "20px",
           marginLeft: "5px",

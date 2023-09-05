@@ -40,6 +40,11 @@ const Orders = () => {
             dataIndex: "title",
           },
           {
+            title: "Price",
+            dataIndex: "price",
+            render: (value) => <span>${value}</span>,
+          },
+          {
             title: "Quantity",
             dataIndex: "quantity",
           },

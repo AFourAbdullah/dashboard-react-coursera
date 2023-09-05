@@ -6,7 +6,7 @@ import {
 } from "@ant-design/icons";
 import { Card, Space, Statistic, Table, Typography } from "antd";
 import React, { useEffect, useState } from "react";
-import { getOrders, getRevenue } from "../api";
+import { getInventory, getOrders, getRevenue, getUsers } from "../api";
 // import React from "react";
 import {
   Chart as ChartJS,
@@ -28,6 +28,23 @@ ChartJS.register(
 );
 
 const Dashboard = () => {
+  const [orders, setOrders] = useState(0);
+  const [inventory, setInventory] = useState(0);
+  const [customers, setCustomers] = useState(0);
+  const [revenue, setRevenue] = useState(0);
+  useEffect(() => {
+    getOrders().then((res) => {
+      setOrders(res.total);
+      setRevenue(res.discountedTotal);
+    });
+    getInventory().then((res) => {
+      setInventory(res.total);
+    });
+    getUsers().then((res) => {
+      setCustomers(res.total);
+    });
+  }, []);
+
   return (
     <Space size={20} direction="vertical">
       <Typography.Title level={3}>Dashboard</Typography.Title>
@@ -45,7 +62,7 @@ const Dashboard = () => {
             />
           }
           title="Orders"
-          value="1234"
+          value={orders}
         />
         <DashbaordCard
           icon={
@@ -60,7 +77,7 @@ const Dashboard = () => {
             />
           }
           title="Inventory"
-          value="12345"
+          value={inventory}
         />
         <DashbaordCard
           icon={
@@ -75,7 +92,7 @@ const Dashboard = () => {
             />
           }
           title="Customers"
-          value="12345"
+          value={customers}
         />
         <DashbaordCard
           icon={
@@ -90,7 +107,7 @@ const Dashboard = () => {
             />
           }
           title="Revenue"
-          value="12345"
+          value={revenue}
         />
       </Space>
       <Space>

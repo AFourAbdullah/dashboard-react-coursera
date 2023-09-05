@@ -6,14 +6,16 @@ import logo from "../assets/logodash.png";
 const Header = () => {
   return (
     <div className="AppHeader">
-      <Image src={logo} width={40} />
-      <Typography.Title>Abdullah's Dashboard</Typography.Title>
+      <Image src={logo} width={40} height={40} style={{ objectFit: "cover" }} />
+      <Typography.Title style={{ color: "white" }}>
+        Abdullah's Dashboard
+      </Typography.Title>
       <Space>
         <Badge count={10} dot>
-          <MailOutlined style={{ fontSize: 24 }} />
+          <MailOutlined style={{ fontSize: 24, color: "white" }} />
         </Badge>
         <Badge count={20}>
-          <BellFilled style={{ fontSize: 24 }} />
+          <BellFilled style={{ fontSize: 24, color: "white" }} />
         </Badge>
       </Space>
     </div>
